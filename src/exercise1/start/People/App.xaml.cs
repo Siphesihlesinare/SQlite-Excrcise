@@ -9,18 +9,19 @@ namespace People
 {
     public partial class App : Application
     {
-        string dbPath => FileAccessHelper.GetLocalFilePath("people.db3");
+        public static PersonRepository PersonRepo { get; set; }
+        string dbPath => FileAccessHelper.GetLocalFilePath("people.dbPath");
 
         public App()
         {
             InitializeComponent();
+            
 
-            MainPage = new People.MainPage()
-            {
-                Text = dbPath,
-            };
+        MainPage = new People.MainPage();
+
+            PersonRepo = new PersonRepository(dbPath);
         }
-
+        
         protected override void OnStart()
         {
             // Handle when your app starts
